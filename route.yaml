@@ -1,0 +1,29 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: ocp-virt-git
+  labels:
+    app: ocp-virt-git
+    app.kubernetes.io/component: ocp-virt-git
+    app.kubernetes.io/instance: ocp-virt-git
+    app.kubernetes.io/name: ocp-virt-git
+    app.kubernetes.io/part-of: elastic-search-front-end
+    app.openshift.io/runtime: nodejs
+    app.openshift.io/runtime-version: 20-minimal-ubi8
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/purefield/ocp-virt.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+    openshift.io/host.generated: 'true'
+spec:
+  host: ocp-virt-git-elastic-search-frontend.apps.cluster1.sandbox524.opentlc.com
+  to:
+    kind: Service
+    name: ocp-virt-git
+    weight: 100
+  port:
+    targetPort: 3000-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

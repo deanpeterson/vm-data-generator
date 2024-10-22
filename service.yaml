@@ -1,0 +1,34 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ocp-virt-git
+  labels:
+    app: ocp-virt-git
+    app.kubernetes.io/component: ocp-virt-git
+    app.kubernetes.io/instance: ocp-virt-git
+    app.kubernetes.io/name: ocp-virt-git
+    app.kubernetes.io/part-of: elastic-search-front-end
+    app.openshift.io/runtime: nodejs
+    app.openshift.io/runtime-version: 20-minimal-ubi8
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/purefield/ocp-virt.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+spec:
+  clusterIP: 172.30.216.179
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 3000-tcp
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.216.179
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: ocp-virt-git
+    deployment: ocp-virt-git
